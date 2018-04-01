@@ -153,7 +153,7 @@ model.load_weights('question_pairs_weights_deeper={}_wider={}_lr={}_dropout={}.h
 predictions = model.predict([x_test,x_test], verbose = True)
 
 
-# In[313]:
+
 
 # Compare testing loss to training and validating loss
 print("mse "+str(mse(y_test, predictions)))
