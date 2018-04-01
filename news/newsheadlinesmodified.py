@@ -153,7 +153,7 @@ model.load_weights('question_pairs_weights_deeper={}_wider={}_lr={}_dropout={}.h
 predictions = model.predict([x_test,x_test], verbose = True)
 
 
-
+# In[313]:
 
 # Compare testing loss to training and validating loss
 print("mse "+str(mse(y_test, predictions)))
@@ -190,6 +190,7 @@ for y in rk:
 print("mae "+str(mae(unnorm_y_test, unnorm_predictions)))
 print("mse "+str(mse(unnorm_y_test, unnorm_predictions)))
 
+
 # In[362]:
 
 print("Summary of actual opening price changes")
@@ -222,8 +223,6 @@ for value in unnorm_y_test:
         direction_test.append(0)
 
 
-		
-		
 # Calculate if the predicted direction matched the actual direction
 direction = acc(direction_test, direction_pred)
 direction = round(direction,4)*100
