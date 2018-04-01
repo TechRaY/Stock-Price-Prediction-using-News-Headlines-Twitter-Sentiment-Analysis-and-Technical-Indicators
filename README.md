@@ -1,2 +1,2 @@
-# Stock-Price-Prediction-with-Tweets-Sentiment-and-News-Headlines-Analysis
+# Stock-Price-Prediction-using-News-Headlines-Twitter-Sentiment-Analysis-and-Technical-Indicators
 B.E. Project
