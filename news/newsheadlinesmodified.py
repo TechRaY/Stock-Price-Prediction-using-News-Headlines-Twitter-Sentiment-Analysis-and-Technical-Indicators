@@ -188,7 +188,7 @@ for y in rk:
 
 # Calculate the median absolute error for the predictions
 print("mae "+str(mae(unnorm_y_test, unnorm_predictions)))
-
+print("mse "+str(mse(unnorm_y_test, unnorm_predictions)))
 
 # In[362]:
 
