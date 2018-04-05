@@ -17,6 +17,8 @@ from keras.models import Model
 from keras.optimizers import Adam, SGD, RMSprop
 from keras import regularizers
 from nltk.stem.porter import PorterStemmer
+import warnings
+warnings.filterwarnings(action='ignore', category=UserWarning, module='gensim')
 
 
 stemmer = PorterStemmer()
