@@ -561,33 +561,44 @@ model.load_weights('./question_pairs_weights_deeper={}_wider={}_lr={}_dropout={}
 predictions = model.predict([x_test,x_test], verbose = True)
 
 
-# In[313]:
-
+y_test = pd.read_csv("input/y_test.csv")
 # Compare testing loss to training and validating loss
-mse(y_test, predictions)
+print("mse "+str(mse(y_test, predictions)))
 
 
+max_price=82.7999880000001
+min_price=-111.34997599999997
 # In[314]:
 
+rk=y_test.values
+#print(len(rk))
+normpreds=pd.read_csv("input/preds.csv")
+unnorm_preds=normpreds.values
+
+
 def unnormalize(price):
-    '''Revert values to their unnormalized amounts'''
     price = price*(max_price-min_price)+min_price
     return(price)
 
 
-# In[345]:
+
 
 unnorm_predictions = []
-for pred in predictions:
+for pred in unnorm_preds:
     unnorm_predictions.append(unnormalize(pred))
-    
+  
+
 unnorm_y_test = []
-for y in y_test:
+for y in rk:
     unnorm_y_test.append(unnormalize(y))
 
 
 # Calculate the median absolute error for the predictions
-mae(unnorm_y_test, unnorm_predictions)
+print("mae "+str(mae(unnorm_y_test, unnorm_predictions)))
+print("mse "+str(mse(unnorm_y_test, unnorm_predictions)))
+
+
+# In[362]:
 
 print("Summary of actual closing price changes")
 print(pd.DataFrame(unnorm_y_test, columns=[""]).describe())
@@ -595,14 +606,34 @@ print()
 print("Summary of predicted closing price changes")
 print(pd.DataFrame(unnorm_predictions, columns=[""]).describe())
 
-
 plt.figure(figsize=(12,4))
-plt.plot(unnorm_predictions)
-plt.plot(unnorm_y_test)
-plt.title("Predicted (blue) vs Actual (green) Closing Price Changes")
+plt.plot(unnorm_predictions,label="Model Predictions")
+plt.plot(unnorm_y_test,label="Actual Values")
+plt.title("Predicted vs Actual Closing Price Changes for TCS")
 plt.xlabel("Testing instances")
 plt.ylabel("Change in Closing Price")
 plt.legend()
 plt.show()
 
+
+
+# Create lists to measure if closing price increased or decreased
+direction_pred = []
+for pred in unnorm_predictions:
+    if pred >= 0:
+        direction_pred.append(1)
+    else:
+        direction_pred.append(0)
+direction_test = []
+for value in unnorm_y_test:
+    if value >= 0:
+        direction_test.append(1)
+    else:
+        direction_test.append(0)
+
+
+# Calculate if the predicted direction matched the actual direction
+direction = acc(direction_test, direction_pred)
+direction = round(direction,4)*100
+print("Predicted values matched the actual direction {}% of the time.".format(direction))
 
