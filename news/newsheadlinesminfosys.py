@@ -207,7 +207,9 @@ plt.plot(unnorm_y_test,label="Actual Values")
 plt.title("Predicted vs Actual Closing Price Changes for TCS")
 plt.xlabel("Testing instances")
 plt.ylabel("Change in Closing Price")
+plt.legend()
 plt.show()
+
 
 
 # Create lists to measure if closing price increased or decreased

@@ -199,11 +199,12 @@ print("Summary of predicted Closing price changes")
 print(pd.DataFrame(unnorm_predictions, columns=[""]).describe())
 
 plt.figure(figsize=(12,4))
-plt.plot(unnorm_y_test)
-plt.plot(unnorm_predictions)
+plt.plot(unnorm_predictions,label="Model Predictions")
+plt.plot(unnorm_y_test,label="Actual Values")
 plt.title("Predicted vs Actual Closing Price Changes for TCS")
 plt.xlabel("Testing instances")
 plt.ylabel("Change in Closing Price")
+plt.legend()
 plt.show()
 
 
